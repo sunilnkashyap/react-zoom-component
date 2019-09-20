@@ -1,18 +1,18 @@
 import React, { CSSProperties, useEffect } from "react";
 
 export interface Props {
-    img: string,
-    zoomImgSrc?: string,
-    alt?: any,
-    imgWidth?: number,
-    imgHeight?: number,
-    zoomLevel?: number,
-    zoomPosition?: {
-        top: number,
-        left: number
-    },
-    outputWidgth?: number,
-    outputHeight?: number
+    Image: string,
+    FullImage?: string,
+    ImageAlt?: any,
+    Width?: number,
+    Height?: number,
+    Magnification?: number,
+    ResultContainer?: {
+        Top?: number,
+        Left?: number,
+        Width?: number,
+        Height?: number
+    }    
 }
 
 const ZoomComponent: React.FC<Props> = (props) => {
@@ -22,23 +22,27 @@ const ZoomComponent: React.FC<Props> = (props) => {
     
     const resultDivStyle: CSSProperties = {
         border: '1px solid #d4d4d4',
-        width: props.outputWidgth ? props.outputWidgth +'px' : '400px',
-        height: props.outputHeight ? props.outputHeight +'px' : '400px'
+        width: props.ResultContainer && props.ResultContainer.Width ? props.ResultContainer.Width +'px' : '400px',
+        height: props.ResultContainer && props.ResultContainer.Height ? props.ResultContainer.Height +'px' : '400px'
     };
 
     useEffect(() => {
-      if(props.zoomPosition){
+      if(props.ResultContainer){
         resultRef.current!.style.position = 'absolute';
-        resultRef.current!.style.top = props.zoomPosition.top +'%';
-        resultRef.current!.style.left = props.zoomPosition.left +'%';
+        resultRef.current!.style.top = props.ResultContainer.Top +'%';
+        resultRef.current!.style.left = props.ResultContainer.Left +'%';
       }
-    }, [resultRef]);    
+    }, [resultRef]);
+    
+    useEffect( () => {
+      zoomLens.current!.style.display = 'none';
+    },[zoomLens])
 
     const zoomLensStyle: CSSProperties = {
         position: 'absolute',
         border: '1px solid #d4d4d4',
-        width: props.zoomLevel ? props.zoomLevel * 20 +'px' : '40px',
-        height: props.zoomLevel ? props.zoomLevel * 20 +'px' : '40px',
+        width: props.Magnification ? props.Magnification * 20 +'px' : '40px',
+        height: props.Magnification ? props.Magnification * 20 +'px' : '40px',
     };
 
   const getCursorPos = (e: any) => { 
@@ -55,10 +59,11 @@ const ZoomComponent: React.FC<Props> = (props) => {
   }
 
   const moveCursor = (e: any) => {
+    zoomLens.current!.style.display = 'block';
     let img = imgRef.current;
     let cx = resultRef.current!.offsetWidth / zoomLens.current!.offsetWidth;
     let cy = resultRef.current!.offsetHeight / zoomLens.current!.offsetHeight;
-    resultRef.current!.style.backgroundImage = "url('" + (props.zoomImgSrc ? props.zoomImgSrc : img!.src) + "')";
+    resultRef.current!.style.backgroundImage = "url('" + (props.FullImage ? props.FullImage : img!.src) + "')";
     resultRef.current!.style.backgroundSize = (img!.width * cx) + "px " + (img!.height * cy) + "px";
     let pos, x, y;
     /*get the cursor's x and y positions:*/
@@ -89,10 +94,10 @@ const ZoomComponent: React.FC<Props> = (props) => {
       <img
         ref={imgRef}
         onMouseMove={moveCursor}
-        alt={props.alt || 'Sample Image'}
-        src={props.img}
-        width={props.imgWidth || 500}
-        height={ props.imgHeight || 500}
+        alt={props.ImageAlt || 'Image'}
+        src={props.Image}
+        width={props.Width}
+        height={ props.Height}
       />
       <div ref={resultRef} style={resultDivStyle}></div>
     </div>

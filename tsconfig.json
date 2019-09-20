@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
+    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
@@ -12,17 +12,14 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
-    "declaration": true,
-    "declarationMap": true,
-    "outDir": "lib"
+    "jsx": "react"
   },
   "include": [
     "src"
   ]
 }
-

@@ -1,44 +1,88 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# react-zoom-component
 
-## Available Scripts
+[![npm version](http://img.shields.io/npm/v/react-zoom-component.svg)](https://npmjs.org/package/react-zoom-component)
 
-In the project directory, you can run:
+## Project status
 
-### `npm start`
+Still in early development, more features are planned and incoming. Should be in a working 
+state right now but it's not tested in lots of different setups yet.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Demonstration of available features available [here](#).
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## About
 
-### `npm test`
+react-zoom-xomponent is inspired by JQuery libraries such as [jQuery Zoom](http://www.jacklmoore.com/zoom/) and
+[elevateZoom-plus](http://igorlino.github.io/elevatezoom-plus/) but a pure React with typescript implementation of
+similar concepts. This plugin works with both URLs to images and in-line images
+([Data URI](https://en.wikipedia.org/wiki/Data_URI_scheme)).
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Available options
 
-### `npm run build`
+All settings except *img* are optional. If no *img* is provided it won't render.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Option | Default&#160;value | Description
+:---:|:---:|---
+Image | *none* | (Required) The smaller version of the image that will be shown when there's no interaction by the user.
+FullImage | *none* | The full resolution version of the image to be used when zooming. If not supplied thumbImage will be used.
+Magnification | 1 | The zoom factor to be used by default. 1 means we use the fullImage at its actual resolution. 
+enableScrollZoom | false | Boolean that toggles if the mouse wheel should be captured when hovering over the image to adjust magnification.
+Width | 'image width' | Width of thumb image if supplied. 
+Height | 'image height' | Height of thumb image if supplied.
+ImageAlt | 'Image' | Alt tag value of thumb image. Alt text will appear on hover of image.
+ResultContainer | {} | Configuration of result container.
+|
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### ResultContainer
+Key | Description
+:---:|---
+Top | Top position of result div in percent. eg. if Top=0 then result container will apper on the top of the thumb image.
+Left | Left position of result div in percent. eg. if Left=0 then result container will apper on the left most of the thumb image.
+Width | Width of the result container.
+Height | Height of the result container.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Magnification 
+Magnification is the zoom ratio of the image. 
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Installation
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To install this library, run:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+$ npm install react-zoom-component --save
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Using this library
 
-## Learn More
+From your React `Component`:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```typescript
+import  React  from  'react';
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+// Import the library
+import  ZoomComponent  from  'react-zoom-component';
+
+// Import sample image
+import  sampleImage  from  './assets/SampleJPGImage_500kbmb.jpg';
+
+
+export  default  class  Demo  extends  React.Component<Props, State> {
+
+	constructor(props:  Props){
+		super(props);
+	}
+	
+	render(){
+		return(
+			<>
+				<div  className="container">
+					<h1>React Zoom Component</h1>
+					<h3>Basic Initialization</h3>
+					<ZoomComponent  Width={500}  Height={500}  Image={sampleImage}  />
+				</div>
+			</>
+		)
+	}
+}
+```
+
