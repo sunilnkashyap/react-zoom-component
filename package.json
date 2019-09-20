@@ -1,7 +1,16 @@
 {
   "name": "react-zoom-component",
   "version": "0.1.0",
+  "author": "Sunil Kashyap",
   "private": true,
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sunilnkashyap/react-zoom-component.git"
+  },
   "dependencies": {
     "@types/jest": "24.0.18",
     "@types/node": "12.7.5",
@@ -15,6 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:lib": "tsc -p .",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -32,5 +42,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/parser": "^7.6.0",
+    "@babel/types": "^7.6.1"
   }
 }
