@@ -23,7 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:lib": "tsc -p .",
+    "build:lib": "tsc -p src/library/index.tsx --jsx react --target ESNEXT --module commonjs  --declaration true --esModuleInterop true --outDir lib",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

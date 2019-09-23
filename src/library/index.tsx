@@ -1,4 +1,5 @@
-import React, { CSSProperties, useEffect } from "react";
+import React from "react";
+import { CSSProperties, useEffect } from "react";
 
 export interface Props {
     Image: string,
