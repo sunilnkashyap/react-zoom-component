@@ -6,8 +6,13 @@ export interface Props {
     Width?: number;
     Height?: number;
     Magnification?: number;
+    ImageClass?: string;
+    LensClass?: string;
+    ResultClass?: string;
     ResultContainer?: {
         Top?: number;
+        Right?: number;
+        Bottom?: number;
         Left?: number;
         Width?: number;
         Height?: number;

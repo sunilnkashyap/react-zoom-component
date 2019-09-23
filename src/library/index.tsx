@@ -8,8 +8,13 @@ export interface Props {
     Width?: number,
     Height?: number,
     Magnification?: number,
+    ImageClass?: string,
+    LensClass?: string,
+    ResultClass?: string,
     ResultContainer?: {
         Top?: number,
+        Right?: number,
+        Bottom?: number,
         Left?: number,
         Width?: number,
         Height?: number
@@ -31,6 +36,8 @@ const ZoomComponent: React.FC<Props> = (props) => {
       if(props.ResultContainer){
         resultRef.current!.style.position = 'absolute';
         resultRef.current!.style.top = props.ResultContainer.Top +'%';
+        resultRef.current!.style.right = props.ResultContainer.Right +'%';
+        resultRef.current!.style.bottom = props.ResultContainer.Bottom +'%';
         resultRef.current!.style.left = props.ResultContainer.Left +'%';
       }
     }, [resultRef]);
@@ -88,11 +95,13 @@ const ZoomComponent: React.FC<Props> = (props) => {
   return (
     <div style={{position: 'relative'}}>
       <div
+        className={props.LensClass}
         ref={zoomLens}
         onMouseMove={moveCursor}
         style={zoomLensStyle}
       ></div>
       <img
+        className={props.ImageClass}
         ref={imgRef}
         onMouseMove={moveCursor}
         alt={props.ImageAlt || 'Image'}
@@ -100,7 +109,7 @@ const ZoomComponent: React.FC<Props> = (props) => {
         width={props.Width}
         height={ props.Height}
       />
-      <div ref={resultRef} style={resultDivStyle}></div>
+      <div ref={resultRef} className={props.ResultClass} style={resultDivStyle}></div>
     </div>
   );
 };

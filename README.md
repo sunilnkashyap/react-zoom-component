@@ -30,8 +30,9 @@ Width | 'image width' | Width of thumb image if supplied.
 Height | 'image height' | Height of thumb image if supplied.
 ImageAlt | 'Image' | Alt tag value of thumb image. Alt text will appear on hover of image.
 ResultContainer | {} | Configuration of result container.
-|
-
+ImageClass| '' | ClassName for thumb image.
+LensClass | '' | ClassName for lens. lens is the square box appears on mouse hovering.
+ResultClass | '' | ClassName for result container.
 ### ResultContainer
 Key | Description
 :---:|---
@@ -86,3 +87,7 @@ export  default  class  Demo  extends  React.Component<Props, State> {
 }
 ```
 
+
+## License
+
+MIT © Sunil Kashyap
